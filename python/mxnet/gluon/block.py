@@ -38,7 +38,64 @@ from .utils import _check_same_symbol_type, _check_all_np_ndarrays
 from .. import numpy_extension as _mx_npx
 from .. import numpy as _mx_np
 from .. util import is_np_array, np_shape, np_array
+import os
 
+
+# Check whether global hook is attempted to be initialized. There is a possibility that
+# global hook can remain None even if tornasole libraries are installed. Therefore we can not
+# rely on global_tornasole_hook being None only.
+global_hook_initialized = False
+
+global_tornasole_hook = None
+register_to_block = False
+register_to_loss_block = False
+
+# Check whether tornasole libraries are installed.
+check_tornasole = ""
+
+def is_tornasole_available():
+    global check_tornasole
+    if check_tornasole == "PRESENT" :
+        return True
+    if check_tornasole == "ABSENT":
+        return False
+    try:
+        from tornasole.mxnet import get_hook
+        check_tornasole = "PRESENT"
+        return True
+    except ImportError:
+        check_tornasole = "ABSENT"
+        return False
+
+def create_global_tornasole_hook():
+    global global_tornasole_hook
+    global global_hook_initialized
+    if global_hook_initialized is False and global_tornasole_hook == None:
+        try:
+            from tornasole.mxnet import get_hook
+            global_tornasole_hook = get_hook()
+            global_hook_initialized = True
+        except ImportError:
+            global_tornasole_hook = None
+    return
+
+def _register_tornasole_hook(block):
+    global global_tornasole_hook
+    global register_to_block
+    create_global_tornasole_hook()
+    if register_to_block is False and global_tornasole_hook:
+        global_tornasole_hook.register_hook(block)
+        register_to_block = True
+    return
+
+def _register_tornasole_hook_to_loss(block):
+    global global_tornasole_hook
+    global register_to_loss_block
+    create_global_tornasole_hook()
+    if register_to_loss_block is False and global_tornasole_hook:
+        global_tornasole_hook.register_hook(block)
+        register_to_loss_block = True
+    return
 
 
 class _BlockScope(object):
@@ -281,6 +338,7 @@ class Block(object):
         self._reg_params = {}
         self._forward_hooks = OrderedDict()
         self._forward_pre_hooks = OrderedDict()
+        self._hookable = True
 
     def __repr__(self):
         s = '{name}(\n{modstr}\n)'
@@ -675,6 +733,13 @@ class Block(object):
             param.cast(dtype)
 
     def __call__(self, *args):
+        if is_tornasole_available():
+            if self._hookable:
+                _register_tornasole_hook(self)
+            from .loss import Loss
+            if self._hookable and isinstance(self, Loss):
+                _register_tornasole_hook_to_loss(self)
+
         """Calls forward. Only accepts positional arguments."""
         for hook in self._forward_pre_hooks.values():
             hook(self, args)
