@@ -42,58 +42,58 @@ import os
 
 
 # Check whether global hook is attempted to be initialized. There is a possibility that
-# global hook can remain None even if tornasole libraries are installed. Therefore we can not
-# rely on global_tornasole_hook being None only.
+# global hook can remain None even if smdebug libraries are installed. Therefore we can not
+# rely on global_smdebug_hook being None only.
 global_hook_initialized = False
 
-global_tornasole_hook = None
+global_smdebug_hook = None
 register_to_block = False
 register_to_loss_block = False
 
-# Check whether tornasole libraries are installed.
-check_tornasole = ""
+# Check whether smdebug libraries are installed.
+check_smdebug = ""
 
-def is_tornasole_available():
-    global check_tornasole
-    if check_tornasole == "PRESENT" :
+def is_smdebug_available():
+    global check_smdebug
+    if check_smdebug == "PRESENT" :
         return True
-    if check_tornasole == "ABSENT":
+    if check_smdebug == "ABSENT":
         return False
     try:
-        from tornasole.mxnet import get_hook
-        check_tornasole = "PRESENT"
+        from smdebug.mxnet import get_hook
+        check_smdebug = "PRESENT"
         return True
     except ImportError:
-        check_tornasole = "ABSENT"
+        check_smdebug = "ABSENT"
         return False
 
-def create_global_tornasole_hook():
-    global global_tornasole_hook
+def create_global_smdebug_hook():
+    global global_smdebug_hook
     global global_hook_initialized
-    if global_hook_initialized is False and global_tornasole_hook == None:
+    if global_hook_initialized is False and global_smdebug_hook == None:
         try:
-            from tornasole.mxnet import get_hook
-            global_tornasole_hook = get_hook()
+            from smdebug.mxnet import get_hook
+            global_smdebug_hook = get_hook()
             global_hook_initialized = True
         except ImportError:
-            global_tornasole_hook = None
+            global_smdebug_hook = None
     return
 
-def _register_tornasole_hook(block):
-    global global_tornasole_hook
+def _register_smdebug_hook(block):
+    global global_smdebug_hook
     global register_to_block
-    create_global_tornasole_hook()
-    if register_to_block is False and global_tornasole_hook:
-        global_tornasole_hook.register_hook(block)
+    create_global_smdebug_hook()
+    if register_to_block is False and global_smdebug_hook:
+        global_smdebug_hook.register_hook(block)
         register_to_block = True
     return
 
-def _register_tornasole_hook_to_loss(block):
-    global global_tornasole_hook
+def _register_smdebug_hook_to_loss(block):
+    global global_smdebug_hook
     global register_to_loss_block
-    create_global_tornasole_hook()
-    if register_to_loss_block is False and global_tornasole_hook:
-        global_tornasole_hook.register_hook(block)
+    create_global_smdebug_hook()
+    if register_to_loss_block is False and global_smdebug_hook:
+        global_smdebug_hook.register_hook(block)
         register_to_loss_block = True
     return
 
@@ -733,12 +733,12 @@ class Block(object):
             param.cast(dtype)
 
     def __call__(self, *args):
-        if is_tornasole_available():
+        if is_smdebug_available():
             if self._hookable:
-                _register_tornasole_hook(self)
+                _register_smdebug_hook(self)
             from .loss import Loss
             if self._hookable and isinstance(self, Loss):
-                _register_tornasole_hook_to_loss(self)
+                _register_smdebug_hook_to_loss(self)
 
         """Calls forward. Only accepts positional arguments."""
         for hook in self._forward_pre_hooks.values():
