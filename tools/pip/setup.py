@@ -177,11 +177,19 @@ if platform.system() == 'Linux':
 for f in os.listdir('mxnet/licenses'):
   package_data['mxnet'].append('mxnet/licenses/{}'.format(f))
 
-from mxnet.base import _generate_op_module_signature
-from mxnet.ndarray.register import _generate_ndarray_function_code
-from mxnet.symbol.register import _generate_symbol_function_code
-_generate_op_module_signature('mxnet', 'symbol', _generate_symbol_function_code)
-_generate_op_module_signature('mxnet', 'ndarray', _generate_ndarray_function_code)
+try:
+    from mxnet.base import _generate_op_module_signature
+    from mxnet.ndarray.register import _generate_ndarray_function_code
+    from mxnet.symbol.register import _generate_symbol_function_code
+    _generate_op_module_signature('mxnet', 'symbol', _generate_symbol_function_code)
+    _generate_op_module_signature('mxnet', 'ndarray', _generate_ndarray_function_code)
+
+    from mxnet import runtime
+    if runtime.Features().is_enabled('INT64_TENSOR_SIZE'):
+        __version__ += "_large_tensor"
+except: # pylint: disable=bare-except
+    if "large_tensor" in os.environ.get("mxnet_variant", ""):
+        __version__ += "_large_tensor"
 
 setup(name=package_name,
       version=__version__,
