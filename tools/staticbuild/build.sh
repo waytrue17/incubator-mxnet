@@ -69,7 +69,7 @@ cp tools/dependencies/LICENSE.binary.dependencies licenses/
 cp NOTICE licenses/
 cp LICENSE licenses/
 cp DISCLAIMER-WIP licenses/
-
+cp AWS_Apache-MXNet_LicenseAgreement.txt python/mxnet/AWS_Apache-MXNet_LicenseAgreement.txt
 
 # Build mxnet
 if [[ -z "$CMAKE_STATICBUILD" ]]; then

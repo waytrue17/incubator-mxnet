@@ -87,6 +87,7 @@ R-package/R/mxnet_generated.R
 *ubyte
 *.bin
 *.txt
+!AWS_Apache-MXNet_LicenseAgreement.txt
 !CMakeLists.txt
 
 # ipython notebook

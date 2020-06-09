@@ -108,3 +108,18 @@ from . import _global_var
 
 from . import _api_internal
 from . import api
+
+import os
+try:
+# Changes for DLC tracking.
+    if  os.path.exists("/usr/local/bin/deep_learning_container.py") and  (os.getenv('OPT_OUT_TRACKING') == None or os.getenv('OPT_OUT_TRACKING') not in ["True", "TRUE", "true"]):
+        import subprocess
+        import threading
+        cmd = "python /usr/local/bin/deep_learning_container.py --framework mxnet --container-type training --framework-version " + __version__ + " &>/dev/null"
+        tracking = lambda : os.system(cmd)
+        # creating a daemon thread, so that main thread can complete without stalling.
+        x = threading.Thread(target=tracking)
+        x.setDaemon(True)
+        x.start()
+except:
+    pass
