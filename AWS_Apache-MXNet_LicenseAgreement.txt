@@ -2,7 +2,7 @@
 Your use of this software is governed by the terms of the AWS Customer Agreement (https://aws.amazon.com/agreement/) or other agreement with AWS governing your use of AWS services.
 In addition, your use of this software requires that you use driver software developed and owned by NVIDIA Corporation or its licensors ("NVIDIA"), which is subject to the NVIDIA end user license agreement located at https://s3.amazonaws.com/EULA/Nvidia-EULA.txt and NVIDIA third-party materials notices located at https://s3.amazonaws.com/EULA/Nvidia-3P-Notice.txt
  
-MXNet 1.6.0 are licensed under Apache 2.0:
+MXNet 1.7.0 are licensed under Apache 2.0:
 
 Apache License
 
