@@ -104,11 +104,11 @@ shutil.copytree(os.path.join(CURRENT_DIR, 'mxnet-build/3rdparty/mshadow/mshadow'
 shutil.copytree(os.path.join(CURRENT_DIR, 'mxnet-build/3rdparty/tvm/nnvm/include/nnvm'),
                 os.path.join(CURRENT_DIR, 'mxnet/include/nnvm'))
 
-package_name = 'mxnet'
+package_name = 'aws-mx'
 
 variant = os.environ['mxnet_variant'].upper()
 if variant != 'CPU':
-    package_name = 'mxnet_{0}'.format(variant.lower())
+    package_name = 'aws-mx_{0}'.format(variant.lower())
 
 def skip_markdown_comments(md):
     lines = md.splitlines()
