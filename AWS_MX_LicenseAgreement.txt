@@ -1,8 +1,46 @@
-
 Your use of this software is governed by the terms of the AWS Customer Agreement (https://aws.amazon.com/agreement/) or other agreement with AWS governing your use of AWS services.
 In addition, your use of this software requires that you use driver software developed and owned by NVIDIA Corporation or its licensors ("NVIDIA"), which is subject to the NVIDIA end user license agreement located at https://s3.amazonaws.com/EULA/Nvidia-EULA.txt and NVIDIA third-party materials notices located at https://s3.amazonaws.com/EULA/Nvidia-3P-Notice.txt
- 
-MXNet 1.7.0 are licensed under Apache 2.0:
+
+Apache MXNet 1.7.0 are licensed under Apache 2.0:
+
+** Cephes Library Functions; version 2.2 --
+https://github.com/apache/incubator-mxnet/blob/master/src/operator/special_functions-inl.h
+** dlpack; version b90e939 --
+https://github.com/dmlc/dlpack/blob/b90e939072066c160b18ea1e7156537b8d3710f6/LICENSE
+** dmlc-core; version 0e13243 --
+https://github.com/dmlc/dmlc-core/blob/ca9f9329654dbd42f06988276c6f74eb8bdd5038/LICENSE
+** googletest/googlemock/scripts/generator; version eb9225c --
+https://github.com/google/googletest/blob/eb9225ce361affe561592e0912320b9db84985d0/googlemock/scripts/generator/LICENSE
+** mkldnn; version a0a87d6 --
+https://github.com/intel/mkl-dnn/blob/a0a87d662edeef38d01db4ac5dd25f59a1f0881f/LICENSE
+** MXNet clojure-package; version 1.7.0 --
+https://github.com/apache/incubator-mxnet/blob/master/contrib/clojure-package/LICENSE
+** MXNet cpp-package; version 1.7.0 --
+https://github.com/apache/incubator-mxnet/blob/master/cpp-package/LICENSE
+** MXNet julia; version 1.7.0 --
+https://github.com/apache/incubator-mxnet/blob/master/julia/LICENSE.md
+** MXNet perl-package; version 1.7.0 --
+https://github.com/apache/incubator-mxnet/tree/master/perl-package
+** MXNet R-package; version 1.7.0 --
+https://github.com/apache/incubator-mxnet/blob/master/R-package/LICENSE
+** MXNet rcnn; version 1.7.0 --
+https://github.com/apache/incubator-mxnet/blob/master/example/rcnn/LICENSE
+** MXNet scala-package; version 1.7.0 --
+https://github.com/apache/incubator-mxnet/blob/master/scala-package/LICENSE
+** onnx/benchmark; version e776aa0 --
+https://github.com/google/benchmark/blob/e776aa0275e293707b6a0901e0e8d8a8a3679508/LICENSE
+** onnx/mx2onnx; version 1.7.0 --
+https://github.com/apache/incubator-mxnet/blob/master/python/mxnet/contrib/onnx/mx2onnx/LICENSE
+** openmp; version 37c7212 --
+https://github.com/llvm-mirror/openmp/blob/37c72127e90360a020f351f18d9cccfc30e5145a/LICENSE.txt
+** ps-lite; version 60b826e --
+https://github.com/dmlc/ps-lite/blob/60b826e4422fee0df00b892c66ffffea11e5da3f/LICENSE
+** tvm; version afd4b3e --
+https://github.com/apache/incubator-tvm/blob/afd4b3e4450984358e9d79a7e8e578483cb7b017/LICENSE
+** tvm/dlpack; version b90e939 --
+https://github.com/dmlc/dmlc-core/blob/808f485387f9a03f78fa9f1159f387d0d91b7a28/LICENSE
+** tvm/dmlc-core; version 0e13243 --
+https://github.com/dmlc/dmlc-core/blob/808f485387f9a03f78fa9f1159f387d0d91b7a28/LICENSE
 
 Apache License
 
@@ -1821,7 +1859,7 @@ this Software without prior written authorization of the copyright holder.
 ** onnx-tensorrt/onnx; version 765f5ee --
 https://github.com/onnx/onnx/blob/765f5ee823a67a866f4bd28a9860e81f3c811ce8/LICENSE
 Copyright (c) Facebook, Inc. and Microsoft Corporation.
-** tree_lstm; version 1.6.0 --
+** tree_lstm; version 1.7.0 --
 https://github.com/apache/incubator-mxnet/blob/master/example/gluon/tree_lstm/LICENSE
 Copyright (c) 2017 Riddhiman Dasgupta, Sheng Zha
 
@@ -2097,6 +2135,93 @@ Gailly and Mark Adler; it does not include third-party code.
 If you redistribute modified sources, we would appreciate that you include in
 the file ChangeLog history information documenting your changes.  Please read
 the FAQ for more information on the distribution of modified source versions.
+
+------
+
+** MKL; version 2019.0 --
+https://software.intel.com/content/www/us/en/develop/tools/math-kernel-library.html
+Copyright 2015-2018, Intel Corporation.
+
+Intel Simplified Software License (Version February 2020)
+
+---------------------------------------------
+
+View PDF [84 KB]
+
+Use and Redistribution. You may use and redistribute the software (the
+“Software”), without modification, provided the following conditions are met:
+
+Redistributions must reproduce the above copyright notice and the following
+terms of use in the Software and in the documentation and/or other materials
+provided with the distribution.
+Neither the name of Intel nor the names of its suppliers may be used to endorse
+or promote products derived from this Software without specific prior written
+permission.
+No reverse engineering, decompilation, or disassembly of this Software is
+permitted.
+Limited patent license. Intel grants you a world-wide, royalty-free,
+non-exclusive license under patents it now or hereafter owns or controls to
+make, have made, use, import, offer to sell and sell (“Utilize”) this Software,
+but solely to the extent that any such patent is necessary to Utilize the
+Software alone. The patent license shall not apply to any combinations which
+include this software. No hardware per se is licensed hereunder.
+
+Third party programs. The Software may contain Third Party Programs. “Third
+Party Programs” are third party software, open source software or other Intel
+software listed in the “third-party-programs.txt” or other similarly named text
+file that is included with the Software. Third Party Programs, even if included
+with the distribution of the Software, may be governed by separate license
+terms, including without limitation, third party license terms, open source
+software notices and terms, and/or other Intel software license terms. These
+separate license terms may govern your use of the Third Party Programs.
+
+DISCLAIMER. THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
+WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT ARE
+DISCLAIMED. THIS SOFTWARE IS NOT INTENDED FOR USE IN SYSTEMS OR APPLICATIONS
+WHERE FAILURE OF THE SOFTWARE MAY CAUSE PERSONAL INJURY OR DEATH AND YOU AGREE
+THAT YOU ARE FULLY RESPONSIBLE FOR ANY CLAIMS, COSTS, DAMAGES, EXPENSES, AND
+ATTORNEYS’ FEES ARISING OUT OF ANY SUCH USE, EVEN IF ANY CLAIM ALLEGES THAT
+INTEL WAS NEGLIGENT REGARDING THE DESIGN OR MANUFACTURE OF THE MATERIALS.
+
+LIMITATION OF LIABILITY. IN NO EVENT WILL INTEL BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. YOU AGREE TO INDEMNIFY AND HOLD
+INTEL HARMLESS AGAINST ANY CLAIMS AND EXPENSES RESULTING FROM YOUR USE OR
+UNAUTHORIZED USE OF THE SOFTWARE.
+
+No support. Intel may make changes to the Software, at any time without notice,
+and is not obligated to support, update or provide training for the Software.
+
+Termination. Intel may terminate your right to use the Software in the event of
+your breach of this Agreement and you fail to cure the breach within a
+reasonable period of time.
+
+Feedback. Should you provide Intel with comments, modifications, corrections,
+enhancements or other input (“Feedback”) related to the Software Intel will be
+free to use, disclose, reproduce, license or otherwise distribute or exploit
+the Feedback in its sole discretion without any obligations or restrictions of
+any kind, including without limitation, intellectual property rights or
+licensing obligations.
+
+Compliance with laws. You agree to comply with all relevant laws and
+regulations governing your use, transfer, import or export (or prohibition
+thereof) of the Software.
+
+Governing law. All disputes will be governed by the laws of the United States
+of America and the State of Delaware without reference to conflict of law
+principles and subject to the exclusive jurisdiction of the state or federal
+courts sitting in the State of Delaware, and each party agrees that it submits
+to the personal jurisdiction and venue of those courts and waives any
+objections. The United Nations Convention on Contracts for the International
+Sale of Goods (1980) is specifically excluded and will not apply to the
+Software.
+
+*Other names and brands may be claimed as the property of others.
 
 ------
 
@@ -2611,7 +2736,7 @@ Copyright
 
 ------
 
-** Apache MXNet Subcomponents; version 1.6.0 --
+** Apache MXNet Subcomponents; version 1.7.0 --
 https://github.com/apache/incubator-mxnet
 Copyright (c) 2019 by Contributors
 
