@@ -345,9 +345,16 @@ if [[ ! -d $DEPS_PATH/usr/local/cuda-${CUDA_MAJOR_VERSION} ]]; then
     done
 
     mkdir -p ${prefix}/include ${prefix}/lib ${prefix}/usr/lib/x86_64-linux-gnu
-    cp ${prefix}/usr/include/x86_64-linux-gnu/cudnn_v${LIBCUDNN_MAJOR}.h ${prefix}/include/cudnn.h
-    ln -s libcudnn_static_v${LIBCUDNN_MAJOR}.a ${prefix}/usr/lib/x86_64-linux-gnu/libcudnn.a
-    cp ${prefix}/usr/local/cuda-${CUDA_MAJOR_VERSION}/lib64/*.a ${prefix}/lib/
-    cp ${prefix}/usr/include/nccl.h ${prefix}/include/nccl.h
-    ln -s libnccl_static.a ${prefix}/usr/lib/x86_64-linux-gnu/libnccl.a
+    if [[ $LIBCUDNN_MAJOR == 8 ]]; then
+        for h in ${prefix}/usr/include/x86_64-linux-gnu/cudnn_*_v8.h; do
+            newfile=$(basename $h | sed 's/_v8//')
+            cp $h ${prefix}/include/$newfile
+        done
+    else
+        cp -f ${prefix}/usr/include/x86_64-linux-gnu/cudnn_v${LIBCUDNN_MAJOR}.h ${prefix}/include/cudnn.h
+    fi
+    ln -sf libcudnn_static_v${LIBCUDNN_MAJOR}.a ${prefix}/usr/lib/x86_64-linux-gnu/libcudnn.a
+    cp -f ${prefix}/usr/local/cuda-${CUDA_MAJOR_VERSION}/lib64/*.a ${prefix}/lib/
+    cp -f ${prefix}/usr/include/nccl.h ${prefix}/include/nccl.h
+    ln -sf libnccl_static.a ${prefix}/usr/lib/x86_64-linux-gnu/libnccl.a
 fi
