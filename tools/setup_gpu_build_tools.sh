@@ -124,6 +124,7 @@ if [[ $VARIANT == cu110* ]]; then
       "cuda-nvcc-${CUDA_MAJOR_DASH}_${CUDA_VERSION}_amd64.deb" \
       "cuda-nvtx-${CUDA_MAJOR_DASH}_${CUDA_NVTX_VERSION}_amd64.deb" \
       "libcuda1-${LIBCUDA_MAJOR}_${LIBCUDA_VERSION}_amd64.deb" \
+      "cuda-nvprof-${CUDA_MAJOR_DASH}_${CUDA_VERSION}_amd64.deb" \
       "nvidia-${LIBCUDA_MAJOR}_${LIBCUDA_VERSION}_amd64.deb" \
     )
     ml_files=( \
