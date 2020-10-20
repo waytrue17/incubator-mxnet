@@ -95,7 +95,7 @@ if [[ $VARIANT == cu* ]]; then
     NVIDIA_MAJOR_VERSION=$(echo $LIBCUDA_VERSION | cut -d. -f1)
     LIBCUDA_MAJOR=$(echo $LIBCUDA_VERSION | cut -d. -f1)
     LIBCUDNN_MAJOR=$(echo $LIBCUDNN_VERSION | cut -d. -f1)
-    LIBVNINFER_MAJOR=$(echo $LIBNVINFER_VERSION | cut -d. -f1)
+    LIBNVINFER_MAJOR=$(echo $LIBNVINFER_VERSION | cut -d. -f1)
     os_name=$(cat /etc/*release | grep '^ID=' | sed 's/^.*=//g')
     os_version=$(cat /etc/*release | grep VERSION_ID | sed 's/^.*"\([0-9]*\)\.\([0-9]*\)"/\1\2/g')
     os_id="${os_name}${os_version}"
@@ -103,11 +103,10 @@ if [[ $VARIANT == cu* ]]; then
         os_id="ubuntu1604"
     fi
     export PATH=/usr/lib/binutils-2.26/bin/:${PATH}:$DEPS_PATH/usr/local/cuda-$CUDA_MAJOR_VERSION/bin
-    export CPLUS_INCLUDE_PATH=${CPLUS_INCLUDE_PATH}:$DEPS_PATH/usr/local/cuda-$CUDA_MAJOR_VERSION/include:$DEPS_PATH/usr/include
-    export C_INCLUDE_PATH=${C_INCLUDE_PATH}:$DEPS_PATH/usr/local/cuda-$CUDA_MAJOR_VERSION/include:$DEPS_PATH/usr/include
+    export CPLUS_INCLUDE_PATH=${CPLUS_INCLUDE_PATH}:$DEPS_PATH/usr/local/cuda-$CUDA_MAJOR_VERSION/include:$DEPS_PATH/usr/include:$DEPS_PATH/usr/include/x86_64-linux-gnu
+    export C_INCLUDE_PATH=${C_INCLUDE_PATH}:$DEPS_PATH/usr/local/cuda-$CUDA_MAJOR_VERSION/include:$DEPS_PATH/usr/include:$DEPS_PATH/usr/include/x86_64-linux-gnu
     export LIBRARY_PATH=${LIBRARY_PATH}:$DEPS_PATH/usr/local/cuda-$CUDA_MAJOR_VERSION/lib64:$DEPS_PATH/usr/lib/x86_64-linux-gnu:$DEPS_PATH/usr/lib/nvidia-$NVIDIA_MAJOR_VERSION
     export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:$DEPS_PATH/usr/local/cuda-$CUDA_MAJOR_VERSION/lib64:$DEPS_PATH/usr/lib/x86_64-linux-gnu:$DEPS_PATH/usr/lib/nvidia-$NVIDIA_MAJOR_VERSION
-    export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:$DEPS_PATH/usr/local/TensorRT-${LIBVNINFER_MAJOR}/lib
     export NVCC=$DEPS_PATH/usr/local/cuda-$CUDA_MAJOR_VERSION/bin/nvcc
 fi
 
@@ -135,7 +134,8 @@ if [[ $VARIANT == cu110* ]]; then
     ml_files=( \
       "libcudnn${LIBCUDNN_MAJOR}-dev_${LIBCUDNN_VERSION}_amd64.deb" \
       "libnccl-dev_${LIBNCCL_VERSION}_amd64.deb" \
-      "libnvinfer${LIBVNINFER_MAJOR}_${LIBNVINFER_VERSION}_amd64.deb" \
+      "libnvinfer${LIBNVINFER_MAJOR}_${LIBNVINFER_VERSION}_amd64.deb" \
+      "libnvinfer-dev_${LIBNVINFER_VERSION}_amd64.deb" \
     )
 elif [[ $VARIANT == cu102* ]]; then
     cuda_files=( \
