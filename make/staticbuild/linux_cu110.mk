@@ -114,7 +114,7 @@ endif
 
 # wheter to use TRT as backend
 USE_TENSORRT = 1
-ONNX_ML = 1
+DONNX_ML = 1
 
 #----------------------------
 # Settings for power and arm arch
