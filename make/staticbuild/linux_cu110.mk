@@ -89,7 +89,7 @@ USE_OPERATOR_TUNING = 1
 USE_LIBJPEG_TURBO = 1
 
 # whether use MKL-DNN library
-USE_MKLDNN = 1
+USE_MKLDNN = 0
 
 # whether use NNPACK library
 USE_NNPACK = 0
@@ -112,9 +112,11 @@ else
 USE_STATIC_MKL = NONE
 endif
 
-# wheter to use TRT as backend
+# wheter to use TRT
 USE_TENSORRT = 1
-DONNX_ML = 1
+
+ONNX_ML = 1
+ONNX_NAMESPACE = onnx
 
 #----------------------------
 # Settings for power and arm arch
