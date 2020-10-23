@@ -63,6 +63,39 @@ mkdir -p $DEPS_PATH
 # Build Dependencies
 source tools/dependencies/make_shared_dependencies.sh
 
+if [[ $PLATFORM == 'linux' && $VARIANT == cu* ]]; then
+    # Build ONNX
+    pushd .
+    echo "Installing ONNX."
+    cd 3rdparty/onnx-tensorrt/third_party/onnx
+    rm -rf build
+    mkdir -p build
+    cd build
+    cmake -DCMAKE_CXX_FLAGS=-I/usr/include/python${PYVER} -DBUILD_SHARED_LIBS=ON ..
+    make -j$(nproc)
+    export LIBRARY_PATH=`pwd`:`pwd`/onnx/:$LIBRARY_PATH
+    export CPLUS_INCLUDE_PATH=`pwd`:$CPLUS_INCLUDE_PATH
+    export CXXFLAGS=-I`pwd`
+
+    popd
+
+    # Build ONNX-TensorRT
+    export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib
+    export CPLUS_INCLUDE_PATH=${CPLUS_INCLUDE_PATH}:/usr/local/cuda-11.0/targets/x86_64-linux/include/
+    pushd .
+    cd 3rdparty/onnx-tensorrt/
+    mkdir -p build
+    cd build
+    cmake -DONNX_NAMESPACE=$ONNX_NAMESPACE ..
+    make -j$(nproc)
+    export LIBRARY_PATH=`pwd`:$LIBRARY_PATH
+    popd
+
+    mkdir -p /work/mxnet/lib/
+    cp 3rdparty/onnx-tensorrt/third_party/onnx/build/*.so $DEPS_PATH/usr/lib/x86_64-linux-gnu
+    cp -L 3rdparty/onnx-tensorrt/build/libnvonnxparser.so $DEPS_PATH/usr/lib/x86_64-linux-gnu
+fi
+
 # Copy LICENSE
 mkdir -p licenses
 cp tools/dependencies/LICENSE.binary.dependencies licenses/

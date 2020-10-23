@@ -84,7 +84,7 @@ ENABLE_CUDA_RTC = 1
 USE_NVTX=1
 
 # use openmp for parallelization
-USE_OPENMP = 1
+USE_OPENMP = 0
 USE_OPERATOR_TUNING = 1
 USE_LIBJPEG_TURBO = 1
 
