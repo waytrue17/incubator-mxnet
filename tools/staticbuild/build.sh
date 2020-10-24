@@ -63,7 +63,12 @@ mkdir -p $DEPS_PATH
 # Build Dependencies
 source tools/dependencies/make_shared_dependencies.sh
 
+echo $LD_LIBRARY_PATH
+
+echo $CPLUS_INCLUDE_PATH
+
 if [[ $PLATFORM == 'linux' && $VARIANT == cu* ]]; then
+    export ONNX_NAMESPACE=onnx
     # Build ONNX
     pushd .
     echo "Installing ONNX."
@@ -81,19 +86,25 @@ if [[ $PLATFORM == 'linux' && $VARIANT == cu* ]]; then
 
     # Build ONNX-TensorRT
     export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib
-    export CPLUS_INCLUDE_PATH=${CPLUS_INCLUDE_PATH}:/usr/local/cuda-11.0/targets/x86_64-linux/include/
+    export CPLUS_INCLUDE_PATH=${CPLUS_INCLUDE_PATH}:$DEPS_PATH/include:/usr/local/cuda-11.0/targets/x86_64-linux/include/
     pushd .
     cd 3rdparty/onnx-tensorrt/
     mkdir -p build
     cd build
-    cmake -DONNX_NAMESPACE=$ONNX_NAMESPACE ..
-    make -j$(nproc)
+    cmake -DONNX_NAMESPACE=$ONNX_NAMESPACE -DTENSORRT_INCLUDE_DIR=$DEPS_PATH/usr/include/x86_64-linux-gnu \
+        -DTENSORRT_LIBRARY_INFER=$DEPS_PATH/usr/lib/x86_64-linux-gnu \
+        -DTENSORRT_LIBRARY_INFER_PLUGIN=$DEPS_PATH/usr/lib/x86_64-linux-gnu \
+        -DTENSORRT_LIBRARY_MYELIN=$DEPS_PATH/usr/lib/x86_64-linux-gnu \
+        -DProtobuf_INCLUDE_DIR=$DEPS_PATH/include \
+        -DProtobuf_LIBRARY=$DEPS_PATH/lib \
+        ..
+    make -v -j$(nproc)
     export LIBRARY_PATH=`pwd`:$LIBRARY_PATH
     popd
 
-    mkdir -p /work/mxnet/lib/
-    cp 3rdparty/onnx-tensorrt/third_party/onnx/build/*.so $DEPS_PATH/usr/lib/x86_64-linux-gnu
-    cp -L 3rdparty/onnx-tensorrt/build/libnvonnxparser.so $DEPS_PATH/usr/lib/x86_64-linux-gnu
+    mkdir -p $DEPS_PATH/usr/{lib,include,onnx}
+    cp 3rdparty/onnx-tensorrt/third_party/onnx/build/*.so $DEPS_PATH/usr/lib
+    cp -f 3rdparty/onnx-tensorrt/third_party/onnx/{build/,}onnx/*.h $DEPS_PATH/usr/include
 fi
 
 # Copy LICENSE

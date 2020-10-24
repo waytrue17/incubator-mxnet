@@ -136,6 +136,10 @@ if [[ $VARIANT == cu110* ]]; then
       "libnccl-dev_${LIBNCCL_VERSION}_amd64.deb" \
       "libnvinfer${LIBNVINFER_MAJOR}_${LIBNVINFER_VERSION}_amd64.deb" \
       "libnvinfer-dev_${LIBNVINFER_VERSION}_amd64.deb" \
+      "libnvinfer-plugin${LIBNVINFER_MAJOR}_${LIBNVINFER_VERSION}_amd64.deb" \
+      "libnvinfer-plugin-dev_${LIBNVINFER_VERSION}_amd64.deb" \
+      "libnvonnxparsers${LIBNVINFER_MAJOR}_${LIBNVINFER_VERSION}_amd64.deb" \
+      "libnvonnxparsers-dev_${LIBNVINFER_VERSION}_amd64.deb" \
     )
 elif [[ $VARIANT == cu102* ]]; then
     cuda_files=( \
