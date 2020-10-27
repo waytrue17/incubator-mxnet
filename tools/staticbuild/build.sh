@@ -68,7 +68,10 @@ echo $LD_LIBRARY_PATH
 echo $CPLUS_INCLUDE_PATH
 
 if [[ $PLATFORM == 'linux' && $VARIANT == cu* ]]; then
+    export CC=gcc-7
+    export CXX=g++-7
     export ONNX_NAMESPACE=onnx
+    export PATH=${PATH}:$DEPS_PATH/protobuf-3.5.1/src
     # Build ONNX
     pushd .
     echo "Installing ONNX."
@@ -76,7 +79,10 @@ if [[ $PLATFORM == 'linux' && $VARIANT == cu* ]]; then
     rm -rf build
     mkdir -p build
     cd build
-    cmake -DCMAKE_CXX_FLAGS=-I/usr/include/python${PYVER} -DBUILD_SHARED_LIBS=ON ..
+    cmake -DCMAKE_CXX_FLAGS=-I/usr/include/python${PYVER} \
+          -DBUILD_SHARED_LIBS=ON \
+          -DProtobuf_LIBRARY=$DEPS_PATH/lib/libprotobuf.so \
+          ..
     make -j$(nproc)
     export LIBRARY_PATH=`pwd`:`pwd`/onnx/:$LIBRARY_PATH
     export CPLUS_INCLUDE_PATH=`pwd`:$CPLUS_INCLUDE_PATH
