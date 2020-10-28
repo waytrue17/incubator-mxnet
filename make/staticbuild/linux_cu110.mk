@@ -23,8 +23,8 @@
 # choice of compiler
 #--------------------
 
-export CC = gcc-7
-export CXX = g++-7
+export CC = gcc
+export CXX = g++
 export NVCC = nvcc
 
 # whether compile with options for MXNet developer
@@ -40,7 +40,7 @@ USE_SIGNAL_HANDLER = 1
 ADD_LDFLAGS += -L$(DEPS_PATH)/lib $(DEPS_PATH)/lib/libculibos.a -lpng -ltiff -ljpeg -lz -ldl -lgfortran -Wl,--version-script=$(CURDIR)/make/config/libmxnet.ver,-rpath,'$${ORIGIN}',--gc-sections
 
 # the additional compile flags you want to add
-ADD_CFLAGS += -I$(DEPS_PATH)/include -ffunction-sections -fdata-sections -DONNX_ML
+ADD_CFLAGS += -I$(DEPS_PATH)/include -ffunction-sections -fdata-sections
 
 #---------------------------------------------
 # matrix computation libraries for CPU/GPU

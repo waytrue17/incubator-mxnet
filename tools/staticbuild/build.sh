@@ -108,9 +108,9 @@ if [[ $PLATFORM == 'linux' && $VARIANT == cu* ]]; then
     export LIBRARY_PATH=`pwd`:$LIBRARY_PATH
     popd
 
-    mkdir -p $DEPS_PATH/usr/{lib,include,onnx}
+    mkdir -p $DEPS_PATH/usr/{lib,include/onnx}
     cp 3rdparty/onnx-tensorrt/third_party/onnx/build/*.so $DEPS_PATH/usr/lib
-    cp -f 3rdparty/onnx-tensorrt/third_party/onnx/{build/,}onnx/*.h $DEPS_PATH/usr/include
+    cp -f 3rdparty/onnx-tensorrt/third_party/onnx/{build/,}onnx/*.h $DEPS_PATH/usr/include/onnx
 fi
 
 # Copy LICENSE
