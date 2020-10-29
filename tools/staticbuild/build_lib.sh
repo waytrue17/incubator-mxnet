@@ -26,6 +26,11 @@ if [[ ! -f $make_config ]]; then
     exit 1
 fi
 
+apt-get update
+apt-get gcc-7
+apt-get g++-7
+apt-get gfortran-7
+
 >&2 echo "Now building mxnet modules..."
 cp $make_config config.mk
 

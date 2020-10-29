@@ -132,6 +132,7 @@ if [[ $VARIANT == cu110* ]]; then
       "nvidia-${LIBCUDA_MAJOR}_${LIBCUDA_VERSION}_amd64.deb" \
     )
     ml_files=( \
+      "libcudnn${LIBCUDNN_MAJOR}_${LIBCUDNN_VERSION}_amd64.deb" \
       "libcudnn${LIBCUDNN_MAJOR}-dev_${LIBCUDNN_VERSION}_amd64.deb" \
       "libnccl-dev_${LIBNCCL_VERSION}_amd64.deb" \
       "libnvinfer${LIBNVINFER_MAJOR}_${LIBNVINFER_VERSION}_amd64.deb" \
