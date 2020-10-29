@@ -2693,6 +2693,15 @@ class Symbol(SymbolBase):
             return np_symbol(out), has_dynamic_shape.value
         return Symbol(out), has_dynamic_shape.value
 
+def _check_dynamic_shape_op(self):
+        """Check if any dynamic shape op are present in the symbol.
+        """
+        out = SymbolHandle()
+        has_dynamic_shape = ctypes.c_bool(False)
+        check_call(_LIB.MXCheckDynamicShapeOp(self.handle,
+                                            ctypes.byref(has_dynamic_shape)))
+        return has_dynamic_shape.value
+
 def var(name, attr=None, shape=None, lr_mult=None, wd_mult=None, dtype=None,
         init=None, stype=None, profiler_scope=None, **kwargs):
     """Creates a symbolic variable with specified name.
