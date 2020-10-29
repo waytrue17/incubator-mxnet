@@ -54,6 +54,11 @@ export FC="gfortran"
 export PKG_CONFIG_PATH=$DEPS_PATH/lib/pkgconfig:$DEPS_PATH/lib64/pkgconfig:$DEPS_PATH/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
 export CPATH=$DEPS_PATH/include:$CPATH
 
+apt-get update
+apt-get install gcc-7
+apt-get install g++-7
+apt-get install gfortran-7
+
 if [[ $PLATFORM == 'linux' && $VARIANT == cu* ]]; then
     source tools/setup_gpu_build_tools.sh $VARIANT $DEPS_PATH
 fi
@@ -62,10 +67,6 @@ mkdir -p $DEPS_PATH
 
 # Build Dependencies
 source tools/dependencies/make_shared_dependencies.sh
-
-echo $LD_LIBRARY_PATH
-
-echo $CPLUS_INCLUDE_PATH
 
 if [[ $PLATFORM == 'linux' && $VARIANT == cu* ]]; then
     export CC=gcc-7
