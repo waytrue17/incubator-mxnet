@@ -38,7 +38,7 @@ if [[ $VARIANT == cu110* ]]; then
     LIBCUDA_VERSION='450.51.06-0ubuntu1'
     LIBCUDNN_VERSION='8.0.4.30-1+cuda11.0'
     LIBNCCL_VERSION='2.7.8-1+cuda11.0'
-    LIBNVINFER_VERSION='7.1.3-1+cuda11.0'
+    LIBNVINFER_VERSION='7.2.1-1+cuda11.0'
 elif [[ $VARIANT == cu102* ]]; then
     CUDA_VERSION='10.2.89-1'
     CUDA_PATCH_VERSION='10.2.2.89-1'
