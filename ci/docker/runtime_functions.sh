@@ -1931,8 +1931,8 @@ push_docs() {
     fi
     popd
     mv $folder_name versions
-    zip -r9 versions.zip versions/.
-    aws s3 cp versions.zip s3://mxnet-website-static-artifacts --acl public-read
+    zip -r9 versions-test.zip versions/.
+    aws s3 cp versions-test.zip s3://mxnet-website-static-artifacts --acl public-read
     popd
 }
 
