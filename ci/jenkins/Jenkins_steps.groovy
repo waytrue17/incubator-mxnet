@@ -1083,7 +1083,7 @@ def docs_prepare() {
             utils.docker_run('ubuntu_cpu_jekyll', 'build_docs', false)
 
             // only stash if we're going to unstash later
-            // utils.pack_lib('full_website', 'docs/_build/full_website.tgz', false)
+            utils.pack_lib('full_website', 'docs/_build/full_website.tgz', false)
 
             // archive so the publish pipeline can access the artifact
             archiveArtifacts 'docs/_build/full_website.tgz'
