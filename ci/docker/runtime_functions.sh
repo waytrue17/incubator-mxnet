@@ -1942,7 +1942,7 @@ push_docs() {
     mkdir $folder_name && tar -xzf full_website.tgz -C $folder_name --strip-components 1
     # check if folder_name already exists in versions
     pushd versions
-    rm -rf folder_name
+    rm -rf $folder_name
     # if [ -d "$folder_name" ]; then
     #     echo "Folder $folder_name already exists in versions. Please double check the FOLDER_NAME variable in Jenkens pipeline"
     #     exit 1
