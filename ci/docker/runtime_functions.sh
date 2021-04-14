@@ -1942,14 +1942,14 @@ push_docs() {
     mkdir $folder_name && tar -xzf full_website.tgz -C $folder_name --strip-components 1
     # check if folder_name already exists in versions
     pushd versions
-    if [ -d "$folder_name" ]; then
-        echo "Folder $folder_name already exists in versions. Please double check the FOLDER_NAME variable in Jenkens pipeline"
-        exit 1
-    fi
+    # if [ -d "$folder_name" ]; then
+    #     echo "Folder $folder_name already exists in versions. Please double check the FOLDER_NAME variable in Jenkens pipeline"
+    #     exit 1
+    # fi
     popd
     mv $folder_name versions
-    zip -r9 versions.zip versions/.
-    aws s3 cp versions.zip s3://mxnet-website-static-artifacts --acl public-read
+    zip -r9 versions-test.zip versions/.
+    aws s3 cp versions-test.zip s3://mxnet-website-static-artifacts --acl public-read
     popd
 }
 
