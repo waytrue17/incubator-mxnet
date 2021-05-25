@@ -1876,6 +1876,7 @@ def convert_reshape(node, **kwargs):
             make_node('Reshape', [input_nodes[0], name+'_targ_shape'], [name], name=name)
             ]
     else:
+        from onnx import TensorProto
         create_tensor([0], name+'_0', kwargs['initializer'])
         create_tensor([1], name+'_1', kwargs['initializer'])
         nodes += [
@@ -1883,7 +1884,9 @@ def convert_reshape(node, **kwargs):
             make_node('Shape', [input_nodes[0]], [name+'_orig_shape']),
             make_node('Shape', [name+'_orig_shape'], [name+'_orig_dim']),
             make_node('Sub', [name+'_targ_dim', name+'_orig_dim'], [name+'_dim_diff']),
-            make_node('Abs', [name+'_dim_diff'], [name+'_pad_len']),
+            make_node("Cast", [name+'_dim_diff'], [name+'_dim_diff_'], to=int(TensorProto.INT32)),
+            make_node('Abs', [name+'_dim_diff_'], [name+'_pad_len_']),
+            make_node("Cast", [name+'_pad_len_'], [name+'_pad_len'], to=int(TensorProto.INT64)),
             make_node('Less', [name+'_targ_dim', name+'_orig_dim'], [name+'_targ_less_orig']),
             make_node('Less', [name+'_orig_dim', name+'_targ_dim'], [name+'_orig_less_targ']),
             make_node('Where', [name+'_targ_less_orig', name+'_pad_len', name+'_0'],
