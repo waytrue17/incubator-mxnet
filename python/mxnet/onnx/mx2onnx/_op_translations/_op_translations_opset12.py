@@ -1261,7 +1261,6 @@ def scalar_op_helper(node, op_name, **kwargs):
         )
         # reverse op
         if "_rminusscalar" in name or "_rdivscalar" in name:
-            print(name)
             mul_node = onnx.helper.make_node(
                 op_name,
                 [scalar_op_name, input_nodes[0]],
@@ -1750,11 +1749,17 @@ def convert_reshape(node, **kwargs):
             if ind_4 > ind0:
                 targ_shape = [i for i in targ_shape if i != -4]
 
-    if targ_shape == [-3, 0] and reverse != 'True':
-        targ_shape = [-1, 0]
-        reverse = 'True'
-
     special_case = False
+    if targ_shape == [-3, 0] and reverse != 'True':
+        special_case = True
+        nodes = [
+            make_node('Shape', [input_nodes[0]], [name+'_shape']),
+            make_node('Split', [name+'_shape'], [name+'_dim0', name+'_dim1', name+'_dim2'], axis=0),
+            make_node('Mul', [name+'_dim0', name+'_dim1'], [name+'_mul']),
+            make_node('Concat', [name+'_mul', name+'_dim2'], [name+'_shape_new'], axis=0),
+            make_node('Reshape', [input_nodes[0], name+'_shape_new'], [name], name=name)
+        ]
+
     if targ_shape == [0, 0, -3, -3] and reverse != 'True':
         special_case = True
         nodes = [
