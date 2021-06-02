@@ -36,7 +36,7 @@ if [[ ((! -e $DEPS_PATH/lib/libopenblas.a) && -z "$CMAKE_STATICBUILD") ||
     if [[ ! $ARCH == 'aarch64' ]]; then
         CXX="g++ -fPIC" CC="gcc -fPIC" $MAKE DYNAMIC_ARCH=1 USE_OPENMP=1
     else
-        $MAKE DYNAMIC_ARCH=1 USE_OPENMP=1
+        CXX="g++-8 -fPIC" CC="gcc-8 -fPIC" FC="gfortran-8" $MAKE DYNAMIC_ARCH=1 USE_OPENMP=1
     fi
 
     if [[ -v CMAKE_STATICBUILD ]]; then
